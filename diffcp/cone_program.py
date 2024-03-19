@@ -375,8 +375,9 @@ def solve_and_derivative_internal(A, b, c, cone_dict, solve_method=None,
         elif status < 0:
             raise SolverError("Solver ecos errored.")
         if status not in [0, 10]:
-            raise SolverError("Solver ecos returned status %s" %
-                              STATUS_LOOKUP[status])
+            result["x"] = np.full(result["x"].shape, np.nan)
+            # raise SolverError("Solver ecos returned status %s" %
+            #                   STATUS_LOOKUP[status])
 
         # Convert ECOS info into SCS info to be compatible if called from
         # CVXPY DIFFCP solver
